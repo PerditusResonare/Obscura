@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ObscuraNet Explorer</title>
+  <style>
+    body {
+      background-color: #e4e0d8;
+      font-family: "Courier New", monospace;
+      margin: 0;
+      padding: 0;
+    }
+
+    .window-frame {
+      max-width: 800px;
+      margin: 2rem auto;
+      border: 2px solid #4d3b2f;
+      box-shadow: 4px 4px 12px rgba(0,0,0,0.3);
+      background-color: #faf6f0;
+    }
+
+    .title-bar {
+      background-color: #4d3b2f;
+      color: #f5f0e6;
+      padding: 0.5rem 0.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
+      font-size: 0.95rem;
+    }
+
+    .window-controls {
+      display: flex;
+      gap: 0.4rem;
+    }
+
+    .control-button {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background-color: #a1866f;
+      border: 1px solid #7a6a5a;
+      cursor: default;
+    }
+
+    .address-bar {
+      background-color: #e4e0d8;
+      border-top: 1px solid #b9ad8c;
+      border-bottom: 1px solid #b9ad8c;
+      padding: 0.4rem 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .address-input {
+      flex: 1;
+      padding: 0.3rem;
+      border: 1px solid #b9ad8c;
+      background-color: #faf6f0;
+      font-family: "Courier New", monospace;
+      font-size: 0.9rem;
+    }
+
+    .go-button {
+      padding: 0.3rem 0.8rem;
+      background-color: #a1866f;
+      color: white;
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      font-family: "Courier New", monospace;
+      font-size: 0.85rem;
+    }
+    .go-button:hover {
+      background-color: #8d715b;
+    }
+
+    .content {
+      padding: 1rem;
+    }
+
+    h2 {
+      margin-top: 0;
+      border-bottom: 1px solid #b9ad8c;
+      padding-bottom: 0.3rem;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin-top: 1rem;
+    }
+
+    li {
+      margin: 0.5rem 0;
+    }
+
+    a {
+      color: #7a6a5a;
+      text-decoration: none;
+      background-color: #d9d4c7;
+      padding: 0.4rem 0.8rem;
+      border: 1px solid #b9ad8c;
+      border-radius: 2px;
+      display: inline-block;
+    }
+    a:hover {
+      background-color: #c8bca6;
+    }
+
+    .footer-note {
+      text-align: center;
+      font-size: 0.85rem;
+      margin: 1rem 0;
+      color: #7a6a5a;
+      opacity: 0.7;
+      font-family: "Courier New", monospace;
+    }
+
+  </style>
+  <script>
+    // Block unauthorized access
+    if (localStorage.getItem('obscuraAuthenticated') !== 'true') {
+      alert("Access restricted. Redirecting to login.");
+      window.location.href = "login.html";
+    }
+
+    function fakeSearch() {
+      alert("Error: ObscuraNet Search Engine is offline.");
+    }
+  </script>
+</head>
+<body>
+  <div class="window-frame">
+    <div class="title-bar">
+      <span>ObscuraNet Explorer</span>
+      <div class="window-controls">
+        <div class="control-button" title="Close"></div>
+        <div class="control-button" title="Minimize"></div>
+        <div class="control-button" title="Maximize"></div>
+      </div>
+    </div>
+
+    <div class="address-bar">
+      <input class="address-input" type="text" placeholder="http://obscuranet/internal" disabled />
+      <button class="go-button" onclick="fakeSearch()">Go</button>
+    </div>
+
+    <div class="content">
+      <h2>Available Sites</h2>
+      <ul>
+        <li><a href="vent.html">VentArea.Blog (Archived)</a></li>
+        <li><a href="archives.html">Obscura Archives</a></li>
+        <li><a href="signal.html">The Signal Watchlist</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    ObscuraNet Explorer v1.0 - Unauthorized redistribution prohibited.
+  </div>
+</body>
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ObscuraNet Archives</title>
+  <style>
+    body {
+      background-color: #e4e0d8;
+      font-family: "Courier New", monospace;
+      margin: 0;
+      padding: 0;
+    }
+    .window-frame {
+      max-width: 800px;
+      margin: 2rem auto;
+      border: 2px solid #4d3b2f;
+      box-shadow: 4px 4px 12px rgba(0,0,0,0.3);
+      background-color: #faf6f0;
+    }
+    .title-bar {
+      background-color: #4d3b2f;
+      color: #f5f0e6;
+      padding: 0.5rem 0.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
+      font-size: 0.95rem;
+    }
+    .window-controls {
+      display: flex;
+      gap: 0.4rem;
+    }
+    .control-button {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background-color: #a1866f;
+      border: 1px solid #7a6a5a;
+      cursor: default;
+    }
+    .loading-bar-container {
+      height: 4px;
+      background-color: #c0b8a4;
+      overflow: hidden;
+    }
+    .loading-bar {
+      height: 100%;
+      width: 0%;
+      background-color: #7a6a5a;
+      transition: width 2s ease-out;
+    }
+    .address-bar {
+      background-color: #e4e0d8;
+      border-top: 1px solid #b9ad8c;
+      border-bottom: 1px solid #b9ad8c;
+      padding: 0.4rem 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .address-input {
+      flex: 1;
+      padding: 0.3rem;
+      border: 1px solid #b9ad8c;
+      background-color: #faf6f0;
+      font-family: "Courier New", monospace;
+      font-size: 0.9rem;
+    }
+    .go-button {
+      padding: 0.3rem 0.8rem;
+      background-color: #a1866f;
+      color: white;
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      font-family: "Courier New", monospace;
+      font-size: 0.85rem;
+    }
+    .go-button:hover {
+      background-color: #8d715b;
+    }
+    .content {
+      padding: 1rem;
+    }
+    h2 {
+      margin-top: 1.5rem;
+      border-bottom: 1px solid #b9ad8c;
+      padding-bottom: 0.3rem;
+    }
+    p, ul, pre {
+      line-height: 1.5;
+      color: #333;
+      font-size: 0.95rem;
+    }
+    ul {
+      padding-left: 1.2rem;
+    }
+    pre {
+      background-color: #e3dcbc;
+      border: 1px solid #b9ad8c;
+      padding: 0.75rem;
+      overflow-x: auto;
+    }
+    .attachment {
+      margin-top: 0.5rem;
+      font-style: italic;
+      color: #7a6a5a;
+    }
+    .footer-note {
+      text-align: center;
+      font-size: 0.85rem;
+      margin: 1rem 0;
+      color: #7a6a5a;
+      opacity: 0.7;
+      font-family: "Courier New", monospace;
+    }
+  </style>
+  <script>
+    if (localStorage.getItem('obscuraAuthenticated') !== 'true') {
+      alert("Access restricted. Redirecting to login.");
+      window.location.href = "login.html";
+    }
+
+    window.addEventListener('load', () => {
+      startLoadingBar();
+    });
+
+    function startLoadingBar() {
+      const bar = document.getElementById('loadingBar');
+      bar.style.width = '0%';
+      setTimeout(() => {
+        bar.style.width = '100%';
+      }, 100);
+    }
+
+    function fakeSearch() {
+      alert("Error: ObscuraNet Search Engine is offline.");
+    }
+
+    function logout() {
+      startLoadingBar();
+      setTimeout(() => {
+        localStorage.removeItem('obscuraAuthenticated');
+        alert('You have been logged out.');
+        window.location.href = 'login.html';
+      }, 2000);
+    }
+
+    function goBack() {
+      startLoadingBar();
+      setTimeout(() => {
+        window.location.href = 'browser.html';
+      }, 2000);
+    }
+  </script>
+</head>
+<body>
+  <div class="window-frame">
+    <div class="title-bar">
+      <span>ObscuraNet Archives</span>
+      <div class="window-controls">
+        <div class="control-button"></div>
+        <div class="control-button"></div>
+        <div class="control-button"></div>
+      </div>
+    </div>
+
+    <div class="loading-bar-container">
+      <div class="loading-bar" id="loadingBar"></div>
+    </div>
+
+    <div class="address-bar">
+      <button class="go-button" onclick="goBack()">← Back</button>
+      <input class="address-input" type="text" value="http://obscuranet/internal/archives" disabled />
+      <button class="go-button" onclick="fakeSearch()">Go</button>
+      <button class="go-button" onclick="logout()">Logout</button>
+    </div>
+
+    <div class="content">
+      <h2>📂 ABOUT OBSCURA</h2>
+      <p><strong>Obscura Internal Memo [Classified]</strong></p>
+      <p>Established 1971 as an independent intelligence contractor. Primary mission: <em>identification and neutralization of cryptographic threats</em>.</p>
+      <ul>
+        <li>CipherNet Takedown (1986)</li>
+        <li>[REDACTED]</li>
+        <li>Signal Surveillance Initiative (2005-2008)</li>
+      </ul>
+      <p><strong>Warning:</strong> Distribution of these documents outside authorized channels is prohibited under Directive 12-A.</p>
+
+      <h2>📂 VENATORES SIGNI DOSSIER</h2>
+      <p><strong>Venatores Signi</strong> — <em>[Latin: Hunters of the Signal]</em></p>
+      <p>Taskforce initiated 2005 after first confirmed Signal intrusion attempts. Mandate:</p>
+      <ul>
+        <li>Monitor suspected Signal channels</li>
+        <li>Identify recruitment vectors</li>
+        <li>Trace encryption patterns</li>
+        <li>Report to Cipher Group</li>
+      </ul>
+      <p><strong>Active Members (Partial):</strong></p>
+      <ul>
+        <li>Praevus: Intel Coordination</li>
+        <li>Custos: Archival Oversight</li>
+        <li>Spectator: Network Surveillance</li>
+        <li>Index: Data Cataloguing</li>
+        <li>Vocifer: Communications Analysis</li>
+      </ul>
+      <p><strong>Status:</strong> Disbanded 2008 following funding cuts and unresolved breach incident.</p>
+
+      <h2>📂 INCIDENT REPORTS</h2>
+      <p><strong>[Incident Log #08-17-5]</strong></p>
+      <p>Unauthorized exfiltration of ObscuraNet archives. Attacker signature matches SIGNAL pattern. Investigation closed without resolution.</p>
+
+      <p><strong>[Incident Log #09-01-2]</strong></p>
+      <p>Venatores Signi requested emergency funding increase. Request denied. Notes: “Insufficient evidence of persistent threat.”</p>
+
+      <h2>📂 INTERNAL CHAT LOG (Partial)</h2>
+      <pre>
+> [ObscuraNet Secure]
+> Praevus: any update on SIGNAL chatter?
+> Spectator: increased volume, new nodes in SEA region.
+> Custos: archive this. Send to Cipher Group.
+      </pre>
+
+      <h2>📂 ATTACHMENTS (BROKEN LINKS)</h2>
+      <p class="attachment">📎 Venatores_Signi_Roster.pdf (File Not Found)</p>
+      <p class="attachment">📎 Signal_Encryption_Keys_v2.txt (Corrupted)</p>
+      <p class="attachment">📎 Obscura_Budget_2007.doc (Access Denied)</p>
+
+      <h2>📂 TIMELINE</h2>
+      <ul>
+        <li>2005: Signal transmission detected</li>
+        <li>2005: Venatores Signi established</li>
+        <li>2007: First successful infiltration logged</li>
+        <li>2008: Venatores Signi disbanded</li>
+        <li>2009: ObscuraNet partial archive leak</li>
+      </ul>
+
+      <p class="footer-note">Note: Certain documents have been purged from this archive for security reasons.</p>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    ObscuraNet Explorer v1.0 - Unauthorized redistribution prohibited.
+  </div>
+</body>
+</html>
