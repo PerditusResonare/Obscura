@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ObscuraNet Login</title>
+  <style>
+    body {
+      background-color: #e4e0d8;
+      font-family: "Courier New", monospace;
+      margin: 0;
+      padding: 0;
+    }
+    .window-frame {
+      max-width: 400px;
+      margin: 4rem auto;
+      border: 2px solid #4d3b2f;
+      box-shadow: 4px 4px 12px rgba(0,0,0,0.3);
+      background-color: #faf6f0;
+    }
+    .title-bar {
+      background-color: #4d3b2f;
+      color: #f5f0e6;
+      padding: 0.5rem 0.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: bold;
+      font-size: 0.95rem;
+    }
+    .window-controls {
+      display: flex;
+      gap: 0.4rem;
+    }
+    .control-button {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background-color: #a1866f;
+      border: 1px solid #7a6a5a;
+      cursor: default;
+    }
+    .loading-bar-container {
+      height: 4px;
+      background-color: #c0b8a4;
+      overflow: hidden;
+    }
+    .loading-bar {
+      height: 100%;
+      width: 0%;
+      background-color: #7a6a5a;
+      transition: width 2s ease-out;
+    }
+    .address-bar {
+      background-color: #e4e0d8;
+      border-top: 1px solid #b9ad8c;
+      border-bottom: 1px solid #b9ad8c;
+      padding: 0.4rem 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .address-input {
+      flex: 1;
+      padding: 0.3rem;
+      border: 1px solid #b9ad8c;
+      background-color: #faf6f0;
+      font-family: "Courier New", monospace;
+      font-size: 0.9rem;
+    }
+    .go-button {
+      padding: 0.3rem 0.8rem;
+      background-color: #a1866f;
+      color: white;
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      font-family: "Courier New", monospace;
+      font-size: 0.85rem;
+    }
+    .go-button:hover {
+      background-color: #8d715b;
+    }
+    .content {
+      padding: 1rem;
+      text-align: center;
+    }
+    h2 {
+      margin-top: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      text-align: left;
+    }
+    label {
+      font-size: 0.9rem;
+    }
+    input[type="text"],
+    input[type="password"] {
+      padding: 0.4rem;
+      border: 1px solid #b9ad8c;
+      background-color: #faf6f0;
+      font-family: "Courier New", monospace;
+      font-size: 0.9rem;
+    }
+    button[type="submit"] {
+      background-color: #a1866f;
+      color: white;
+      border: none;
+      padding: 0.4rem 0.8rem;
+      font-family: "Courier New", monospace;
+      cursor: pointer;
+      border-radius: 2px;
+      font-size: 0.85rem;
+    }
+    button[type="submit"]:hover {
+      background-color: #8d715b;
+    }
+    .footer-note {
+      text-align: center;
+      font-size: 0.85rem;
+      margin: 1rem 0;
+      color: #7a6a5a;
+      opacity: 0.7;
+      font-family: "Courier New", monospace;
+    }
+  </style>
+  <script>
+    window.addEventListener('load', () => {
+      startLoadingBar();
+    });
+
+    function startLoadingBar() {
+      const bar = document.getElementById('loadingBar');
+      bar.style.width = '0%';
+      setTimeout(() => {
+        bar.style.width = '100%';
+      }, 100);
+    }
+
+    function fakeSearch() {
+      alert("Error: ObscuraNet Search Engine is offline.");
+    }
+
+    function goBack() {
+      startLoadingBar();
+      setTimeout(() => {
+        window.location.href = 'browser.html'; // or your landing page
+      }, 2000);
+    }
+
+    function validateLogin(event) {
+      event.preventDefault();
+      startLoadingBar();
+      setTimeout(() => {
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value.trim();
+        if (username === 'perditus' && password === 'resonare') {
+          localStorage.setItem('obscuraAuthenticated', 'true');
+          window.location.href = 'browser.html';
+        } else {
+          alert('Invalid credentials. Access denied.');
+        }
+      }, 2000);
+    }
+  </script>
+</head>
+<body>
+  <div class="window-frame">
+    <div class="title-bar">
+      <span>ObscuraNet Login</span>
+      <div class="window-controls">
+        <div class="control-button"></div>
+        <div class="control-button"></div>
+        <div class="control-button"></div>
+      </div>
+    </div>
+
+    <div class="loading-bar-container">
+      <div class="loading-bar" id="loadingBar"></div>
+    </div>
+
+    <div class="address-bar">
+      <button class="go-button" onclick="goBack()">← Back</button>
+      <input class="address-input" type="text" value="http://obscuranet/login" disabled />
+      <button class="go-button" onclick="fakeSearch()">Go</button>
+    </div>
+
+    <div class="content">
+      <h2>Secure Login</h2>
+      <form onsubmit="validateLogin(event)">
+        <label for="username">Username:</label>
+        <input type="text" id="username" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" required>
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    ObscuraNet Explorer v1.0 - Unauthorized access prohibited.
+  </div>
+</body>
+</html>
